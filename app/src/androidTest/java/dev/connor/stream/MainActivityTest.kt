@@ -60,6 +60,24 @@ class MainActivityTest {
     }
 
     @Test
+    fun appendedJsonlNoteRendersAfterBroadcast() {
+        TestUtils.writeNotes(context, listOf(1L to "Existing note"))
+
+        ActivityScenario.launch(MainActivity::class.java).use {
+            onView(withId(R.id.notesRecyclerView))
+                .check(RecyclerViewItemCountAssertion(1))
+
+            TestUtils.appendNote(context, 2L, "Appended note")
+            context.sendBroadcast(Intent(NoteForegroundService.ACTION_UPDATED))
+
+            onView(withText("Appended note"))
+                .check(matches(isDisplayed()))
+            onView(withId(R.id.notesRecyclerView))
+                .check(RecyclerViewItemCountAssertion(2))
+        }
+    }
+
+    @Test
     fun jsonlNoteRendersOnLaunch() {
         TestUtils.writeNotes(context, listOf(2L to "Render this"))
 

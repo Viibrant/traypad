@@ -29,6 +29,15 @@ object TestUtils {
         file.writeText(content)
     }
 
+    fun appendNote(context: Context, timestamp: Long, text: String) {
+        val file = File(context.filesDir, NOTES_FILE)
+        val line = JSONObject()
+            .put("ts", timestamp)
+            .put("text", text)
+            .toString() + "\n"
+        file.appendText(line)
+    }
+
     fun readNoteLines(context: Context): List<String> {
         val file = File(context.filesDir, NOTES_FILE)
         if (!file.exists()) {
