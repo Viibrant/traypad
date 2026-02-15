@@ -1,5 +1,7 @@
 # Traypad
 
+[⬇️ Download latest release](https://github.com/Viibrant/traypad/releases)
+
 A tiny Android jotter for anything you want to capture fast
 
 ## Features
