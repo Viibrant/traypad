@@ -1,5 +1,6 @@
 package dev.connor.stream
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -50,6 +51,7 @@ class NoteForegroundService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
+    @SuppressLint("MissingPermission")
     private fun handleReply(intent: Intent) {
         // Notification action handling for inline reply.
         val input = RemoteInput.getResultsFromIntent(intent)
